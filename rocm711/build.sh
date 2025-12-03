@@ -75,8 +75,8 @@ podman build \
   $extra_build_args \
   -t $TAG  2>&1 | tee $LOG
 
-enroot import -x mount podman://$TAG -o $TAG.sqsh
+podman save $TAG -o sebkelle-$BASENAME.tar
 
-#docker save $TAG -o /tmp/sfantao-sif-build-pipe/$SIF.tar
+#enroot import -x mount podman://$TAG -o sebkelle-$BASENAME.sqsh
 
 exit 0

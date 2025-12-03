@@ -63,9 +63,9 @@ version TRITON_FINAL_LLVM a66376b0dc3b2ea8a84fda26faca287980986f78
 # You should not need to change anything below this line.
 #
 
-BASENAME=rocm711
-TAG=megatron:$BASENAME
-DOCKERFILE=build-megatron-$BASENAME.docker
+BASENAME=rocm702
+TAG=base-net:$BASENAME
+DOCKERFILE=build-$BASENAME.docker
 LOG=build-$BASENAME.log
 
 podman build \
@@ -74,6 +74,6 @@ podman build \
   $extra_build_args \
   -t $TAG  2>&1 | tee $LOG
 
-enroot import -x mount podman://$TAG -o megatron-$BASENAME.sqsh
+podman save $TAG -o base-net-$BASENAME.tar
 
 exit 0
