@@ -75,9 +75,7 @@ podman build \
   $extra_build_args \
   -t $TAG  2>&1 | tee $LOG
 
-
-#rm -rf /tmp/sfantao-sif-build-pipe
-#mkdir /tmp/sfantao-sif-build-pipe
+enroot import -x mount podman://$TAG -o $TAG.sqsh
 
 #docker save $TAG -o /tmp/sfantao-sif-build-pipe/$SIF.tar
 
