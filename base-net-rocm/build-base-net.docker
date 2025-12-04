@@ -344,7 +344,7 @@ RUN set -eux; \
         -DHDF5_ENABLE_PARALLEL=ON \
         -DBUILD_SHARED_LIBS=ON \
         .. ; \
-  cmake --build . --config Release; \
+  cmake --build . --config Release -j; \
   cmake --install . --prefix /opt/hdf5; \
   cd /; \
   rm -rf /hdf5

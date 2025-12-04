@@ -8,9 +8,11 @@ version () {
 
 MI_TARGET='gfx942'
 
+export ROCM_VERSION='702'
 version ROCM_RELEASE_MAJOR '7'
-version ROCM_RELEASE_MINOR '1'
-version ROCM_RELEASE_PATCH '1'
+version ROCM_RELEASE_MINOR '0'
+version ROCM_RELEASE_PATCH '2'
+
 version MPI4PY '4.1.0'
 version CUPY '13.6.0'
 version RCCL '5bd5079'
@@ -66,9 +68,8 @@ version TRITON_FINAL_LLVM a66376b0dc3b2ea8a84fda26faca287980986f78
 # You should not need to change anything below this line.
 #
 
-BASENAME=rocm711
-TAG=sebkelle-mi300a:$BASENAME
-#SIF=$(basename $(pwd))-$BASENAME.sif
+BASENAME=base-net
+TAG=rocm${ROCM_VERSION}
 DOCKERFILE=build-$BASENAME.docker
 LOG=build-$BASENAME.log
 
@@ -76,9 +77,9 @@ podman build \
   --build-arg MI_TARGET=$MI_TARGET \
   -f $DOCKERFILE \
   $extra_build_args \
-  -t $TAG  2>&1 | tee $LOG
+  -t $BASENAME:$TAG  2>&1 | tee $LOG
 
-podman save $TAG -o sebkelle-$BASENAME.tar
+podman save $BASENAME:$TAG -o $BASENAME-$TAG.tar
 
 #enroot import -x mount podman://$TAG -o sebkelle-$BASENAME.sqsh
 
