@@ -332,8 +332,9 @@ RUN set -eux ; \
   mv /opt/mybuild/build/* /opt/rccltests ; \
   rm -rf /opt/mybuild 
 
-RUN set -eux; \
-  apt-get -y install cmake-curses-gui vim bc
+#RUN set -eux; \
+#  apt-get update ; \
+#  apt-get -y install cmake-curses-gui vim bc
 
 #
 # HDF5
