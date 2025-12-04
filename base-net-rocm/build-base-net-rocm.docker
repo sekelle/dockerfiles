@@ -4,7 +4,7 @@ RUN set -eux ; \
   apt-get update ; \
   apt-get -y install \
     git cmake gcc g++ gfortran numactl gawk patch tar autoconf automake libtool nano which gpg less \
-    zlib1g-dev libncurses-dev graphviz wget ninja-build ; \
+    zlib1g-dev libncurses-dev graphviz wget ninja-build cmake-curses-gui vim bc; \
   apt-get clean ; \
   rm -rf /var/lib/apt/lists/* ; \
   true
@@ -18,9 +18,9 @@ RUN set -eux ; \
   wget https://repo.radeon.com/rocm/rocm.gpg.key -O - | \
     gpg --dearmor | tee /etc/apt/keyrings/rocm.gpg > /dev/null
 
-ENV ROCM_RELEASE_MAJOR 7
-ENV ROCM_RELEASE_MINOR 1
-ENV ROCM_RELEASE_PATCH 1
+ARG ROCM_RELEASE_MAJOR
+ARG ROCM_RELEASE_MINOR
+ARG ROCM_RELEASE_PATCH
 ENV ROCM_RELEASE $ROCM_RELEASE_MAJOR.$ROCM_RELEASE_MINOR.$ROCM_RELEASE_PATCH
 
 RUN set -eux ; \
@@ -331,9 +331,6 @@ RUN set -eux ; \
   mkdir /opt/rccltests ; \
   mv /opt/mybuild/build/* /opt/rccltests ; \
   rm -rf /opt/mybuild 
-
-RUN set -eux; \
-  apt-get -y install cmake-curses-gui vim bc
 
 #
 # HDF5

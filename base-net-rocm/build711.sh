@@ -8,6 +8,9 @@ version () {
 
 MI_TARGET='gfx942'
 
+version ROCM_RELEASE_MAJOR '7'
+version ROCM_RELEASE_MINOR '1'
+version ROCM_RELEASE_PATCH '1'
 version MPI4PY '4.1.0'
 version CUPY '13.6.0'
 version RCCL '5bd5079'
