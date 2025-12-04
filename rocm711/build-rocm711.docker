@@ -4,7 +4,7 @@ RUN set -eux ; \
   apt-get update ; \
   apt-get -y install \
     git cmake gcc g++ gfortran numactl gawk patch tar autoconf automake libtool nano which gpg less \
-    zlib1g-dev libncurses-dev graphviz wget ; \
+    zlib1g-dev libncurses-dev graphviz wget ninja-build ; \
   apt-get clean ; \
   rm -rf /var/lib/apt/lists/* ; \
   true
@@ -70,15 +70,15 @@ RUN $WITH_CONDA ; set -eux ; \
   mkdir /opt/mybuild/build ; \
   cd  /opt/mybuild/build ; \
   CXX=$ROCM_PATH/bin/hipcc \
-  cmake \
+  cmake -G Ninja \
     -DBUILD_LOCAL_GPU_TARGET_ONLY=ON \
     -DCOMPILING_TARGETS=$MI_TARGET \
     -DENABLE_MSCCLPP=OFF \
     -DCMAKE_INSTALL_PREFIX=/opt/rccl \
     -DCMAKE_BUILD_TYPE=Release \
     .. ; \
-  nice make -j V=1 VERBOSE=1 ; \
-  nice make -j install ; \
+  ninja ; \
+  ninja install ; \
   cd / ; rm -rf /opt/mybuild
 
 
