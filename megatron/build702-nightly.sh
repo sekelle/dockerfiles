@@ -7,6 +7,7 @@ version () {
 }
 
 MI_TARGET='gfx942'
+MI_NAME='MI300A'
 
 ROCM_RELEASE_MAJOR='7'
 ROCM_RELEASE_MINOR='0'
@@ -51,7 +52,7 @@ version TORCHAUDIO "*"
 version DEEPSPEED '0.17.4'
 version FLASH_ATTENTION 'v2.8.3'
 version VLLM 'v0.10.1'
-version TE '1139bc1'
+version TE 'v2.2_rocm'
 version MEGATRON '856c36d'
 version AITER 'a2122a2'
 version XFORMERS '90f6960'
@@ -74,13 +75,14 @@ version TRITON_FINAL_LLVM a66376b0dc3b2ea8a84fda26faca287980986f78
 # You should not need to change anything below this line.
 #
 
-BASENAME=megatron
+BASENAME=megatron-nightly
 TAG=rocm${ROCM_VERSION}
 DOCKERFILE=build-$BASENAME.docker
 LOG=build-$BASENAME.log
 
 podman build \
   --build-arg MI_TARGET=$MI_TARGET \
+  --build-arg MI_NAME=$MI_NAME \
   --build-arg ROCM_RELEASE_MAJOR=$ROCM_RELEASE_MAJOR \
   --build-arg ROCM_RELEASE_MINOR=$ROCM_RELEASE_MINOR \
   --build-arg ROCM_RELEASE_PATCH=$ROCM_RELEASE_PATCH \
